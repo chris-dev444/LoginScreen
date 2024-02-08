@@ -7,26 +7,33 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import * as Animatable from 'react-native-animatable'
+
+import {useNavigation} from '@react-navigation/native'
+
 export default function Welcome(){
+
+    const navigation = useNavigation();
+
     return(
         <View style={styles.container}>
             <View style={styles.containerLogo}>
-                <Image 
+                <Animatable.Image
+                    animation="flipInY"
                     source={require('../../assets/social.png')}
                     style={{width: '50%'}}
                     resizeMode='contain'
-                    
                 />
             </View>
 
-            <View style={styles.containerForm}>
+            <Animatable.View delay={600} animation="fadeInUp" style={styles.containerForm}>
                 <Text style={styles.title}>Crie o aplicativo da sua empresa!</Text>
                 <Text style={styles.text}>Faça o login para começar</Text>
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('SignIn')}>
                     <Text style={styles.buttonText}>Acessar</Text>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
         </View>  
     );
 }
@@ -35,11 +42,11 @@ export default function Welcome(){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: "#38A69D"
+        backgroundColor: "rgb(158,235,71)"
     },
     containerLogo: {
         flex: 2,
-        backgroundColor: 'blue',
+        backgroundColor: 'rgb(158,235,71)',
         alignItems: 'center'
     },
     containerForm: {
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'absolute',
-        backgroundColor: '#38a69d',
+        backgroundColor: 'rgb(158,235,71)',
         borderRadius: 50,
         paddingVertical: 8,
         width: '60%',
